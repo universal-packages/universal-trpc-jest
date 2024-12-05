@@ -2,14 +2,19 @@ import { initTRPC } from '@trpc/server'
 
 import '../src'
 
-const trpc = initTRPC.create()
+function createContext() {
+  return { session: { userId: '1' } }
+}
+
+const trpc = initTRPC.context<typeof createContext>().create()
+
 const appRouter = trpc.router({
-  getUser: trpc.procedure.query(() => {
-    return { id: '1', name: 'Tim' }
+  getUser: trpc.procedure.query(({ ctx }) => {
+    return { id: ctx.session.userId, name: 'Tim' }
   })
 })
 
-trpcJest.runTrpcServer(appRouter)
+trpcJest.runTrpcServer(appRouter, createContext())
 
 describe('trpc-jest', (): void => {
   it('can use client to access the server ran at tio', async (): Promise<void> => {
