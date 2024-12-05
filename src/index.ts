@@ -3,6 +3,8 @@ import { AnyTRPCRouter } from '@trpc/server'
 import { createHTTPServer } from '@trpc/server/adapters/standalone'
 import { Server } from 'http'
 
+import './globals'
+
 const DEFAULT_HOST = 'localhost'
 const DEFAULT_PORT = 4000 + Number(process.env['JEST_WORKER_ID'])
 let SERVER: Server
