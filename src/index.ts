@@ -36,7 +36,7 @@ global.trpcJest = {
 
   client: function client<R extends AnyTRPCRouter>(router: R) {
     const client = createTRPCClient<typeof router>({
-      links: [httpBatchLink({ url: `http://${DEFAULT_HOST}:${DEFAULT_PORT}` } as any)]
+      links: [httpBatchLink({ url: `http://${DEFAULT_HOST}:${DEFAULT_PORT}`, transformer: router._def._config.transformer } as any)]
     })
 
     return client
