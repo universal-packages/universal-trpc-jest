@@ -7,6 +7,7 @@ import './globals'
 
 const DEFAULT_HOST = 'localhost'
 const DEFAULT_PORT = 4000 + Number(process.env['JEST_WORKER_ID'])
+const DEFAULT_SERVER_PATH = '/trpc'
 let SERVER: Server
 
 beforeAll(async () => {
@@ -31,12 +32,12 @@ afterAll(async () => {
 
 global.trpcJest = {
   runTrpcServer: async function runTrpcServer<R extends AnyTRPCRouter, C = any>(router: R, context?: C) {
-    SERVER = createHTTPServer({ router, createContext: () => context || {} })
+    SERVER = createHTTPServer({ router, basePath: DEFAULT_SERVER_PATH, createContext: () => context || {} })
   },
 
   client: function client<R extends AnyTRPCRouter>(router: R) {
     const client = createTRPCClient<typeof router>({
-      links: [httpBatchLink({ url: `http://${DEFAULT_HOST}:${DEFAULT_PORT}`, transformer: router._def._config.transformer } as any)]
+      links: [httpBatchLink({ url: `http://${DEFAULT_HOST}:${DEFAULT_PORT}/${DEFAULT_SERVER_PATH}/`, transformer: router._def._config.transformer } as any)]
     })
 
     return client
