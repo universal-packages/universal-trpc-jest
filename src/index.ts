@@ -33,6 +33,10 @@ afterAll(async () => {
   }
 })
 
+afterEach(async () => {
+  HEADERS = {}
+})
+
 global.trpcJest = {
   runTrpcServer: async function runTrpcServer<R extends AnyTRPCRouter, C = any>(router: R, context?: C) {
     SERVER = createHTTPServer({ router, basePath: SERVER_PATH, createContext: (ctx) => ({ ...ctx, ...context }) })
