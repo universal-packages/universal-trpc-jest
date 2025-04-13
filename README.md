@@ -56,6 +56,22 @@ it('should be called', async () => {
 })
 ```
 
+#### **`trpcJest.setServerPath(path: string)`**
+
+Sets the path of the server, this is the path that will be used to make requests to the server.
+
+```js
+trpcJest.setServerPath('/trpc')
+``` 
+
+#### **`trpcJest.setClientHeaders(headers: Record<string, string>)`**
+
+Sets the headers of the client to send to the server.
+
+```js
+trpcJest.setClientHeaders({ 'x-test': 'test' })
+```
+
 ## Typescript
 
 In order for typescript to see the global types you need to reference the types somewhere in your project, normally `./src/globals.d.ts`.
