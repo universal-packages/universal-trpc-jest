@@ -1,6 +1,6 @@
 {
   "name": "@universal-packages/trpc-jest",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Jest tooling for trpc",
   "author": "David De Anda <david@universal-packages.com> (https://github.com/universal-packages)",
   "license": "MIT",
